@@ -2,6 +2,6 @@
     "uniqueid": "kcRoofColorSelector",
     "name": "Roof Color Selector",
     "description": "Adds a small swatch bar when a building with a roof is selected. Pick a preset to recolor only that building's roof. The color is saved with the game.",
-    "author": "YOUR_NAME_HERE",
+    "author": "Ichiroe",
     "version": "1.0.0"
 }
