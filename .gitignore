@@ -1,0 +1,11 @@
+# Build output from local compile checks
+bin/
+obj/
+*.dll
+*.pdb
+
+# Editor and OS files
+.vs/
+.vscode/
+Thumbs.db
+desktop.ini

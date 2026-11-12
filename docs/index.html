@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roof Color Selector for Kingdoms and Castles</title>
+  <meta name="description" content="A Kingdoms and Castles mod for recoloring building roofs, with saved regions.">
+  <style>
+    :root {
+      --bg: #f5f3ee;
+      --fg: #1d2330;
+      --muted: #5b6474;
+      --card: #ffffff;
+      --accent: #a63d2f;
+      --accent2: #2f6b3a;
+      --line: #dcd7cc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #14171d;
+        --fg: #e9ecf2;
+        --muted: #9aa3b2;
+        --card: #1c2029;
+        --accent: #d97a66;
+        --accent2: #7fbf8a;
+        --line: #2c323e;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #14171d;
+      --fg: #e9ecf2;
+      --muted: #9aa3b2;
+      --card: #1c2029;
+      --accent: #d97a66;
+      --accent2: #7fbf8a;
+      --line: #2c323e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 880px; margin: 0 auto; padding: 0 16px; }
+    header { padding: 56px 0 28px; }
+    h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 8px; }
+    h2 { font-size: 1.4rem; margin: 40px 0 12px; }
+    h3 { font-size: 1.1rem; margin: 0 0 6px; }
+    p { margin: 0 0 14px; }
+    .lede { font-size: 1.15rem; color: var(--muted); }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin-bottom: 14px;
+    }
+    .swatches { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 6px; }
+    .swatch {
+      width: 36px; height: 36px; border-radius: 8px;
+      border: 2px solid var(--line);
+    }
+    .grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); margin-top: 10px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+    }
+    code, pre {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 0.92rem;
+    }
+    code { background: var(--card); border: 1px solid var(--line); border-radius: 4px; padding: 1px 5px; }
+    pre {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px;
+      overflow-x: auto;
+    }
+    ol, ul { padding-left: 22px; margin: 0 0 14px; }
+    li { margin-bottom: 6px; }
+    .status {
+      border-left: 4px solid var(--accent);
+      background: var(--card);
+      padding: 14px 16px;
+      border-radius: 6px;
+      margin: 18px 0;
+    }
+    a { color: var(--accent2); }
+    footer {
+      margin: 56px 0 40px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+    }
+    @media (max-width: 480px) {
+      h1 { font-size: 1.8rem; }
+      main { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <span class="badge">Experimental · not yet tested in game</span>
+    <h1>Roof Color Selector</h1>
+    <p class="lede">Recolor building roofs in Kingdoms and Castles, and save groups of roofs as named regions.</p>
+    <div class="swatches" aria-label="Preset colors">
+      <div class="swatch" style="background:#e8e8e3"></div>
+      <div class="swatch" style="background:#4a5768"></div>
+      <div class="swatch" style="background:#8b3a2b"></div>
+      <div class="swatch" style="background:#c4663a"></div>
+      <div class="swatch" style="background:#2f6b3a"></div>
+      <div class="swatch" style="background:#1f3a68"></div>
+      <div class="swatch" style="background:#c9a227"></div>
+      <div class="swatch" style="background:#2b2b2b"></div>
+    </div>
+  </header>
+
+  <div class="status">
+    <strong>Status.</strong> The code compiles against the current game (Unity 2019.4.41), but it has not been run in the game yet. The roof tint may not be visible on game buildings. See <a href="#known-issues">known issues</a>.
+  </div>
+
+  <h2>What it does</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Roof swatches</h3>
+      <p>Select a building that has a roof and a row of eight preset colors appears. Click one to recolor that building's roof. The choice is saved with your game.</p>
+    </div>
+    <div class="card">
+      <h3>Regions</h3>
+      <p>Open the <em>Regions</em> window, turn on <em>Paint</em>, and drag a rectangle over the map. Every roof inside is collected. Name the group, pick a color, and save it. Apply it again later, or delete it.</p>
+    </div>
+    <div class="card">
+      <h3>Saved with the game</h3>
+      <p>Roof colors and regions are stored through the game's own save system, so they come back when you reload.</p>
+    </div>
+  </div>
+
+  <h2>Install</h2>
+  <ol>
+    <li>Copy the <code>RoofColorSelector</code> folder into your game's mods location.</li>
+    <li>Start the game and load a save with buildings that have roofs.</li>
+    <li>Select a building to see the swatch row. Press <em>Regions</em> in the top-left corner for the region window.</li>
+  </ol>
+  <p>The mod is plain C# source, so there is nothing to compile and no asset bundle. Check <code>KingdomsAndCastles_Data\mods\log.txt</code> for <code>Compilation success</code> followed by <code>Found 1 SceneLoaded entry point(s)</code> to confirm it loaded.</p>
+
+  <h2>How it works</h2>
+  <ul>
+    <li>Written in C# source only. It uses the game's own building API and Unity's material and texture calls.</li>
+    <li>No custom shader and no asset bundle, so it doesn't depend on a bundle built for one Unity version.</li>
+    <li>Roofs are found by renderer name: any renderer with "roof" in its name counts.</li>
+    <li>Public names use a <code>kc</code> prefix to avoid clashes with other mods.</li>
+  </ul>
+
+  <h2 id="known-issues">Known issues</h2>
+  <ul>
+    <li><strong>The tint may not show.</strong> Game buildings take their look from a shared livery texture, and the recolor sets <code>_Color</code>, which is probably white on those materials.</li>
+    <li><strong>Colors can be overwritten.</strong> The game can rewrite building materials when it refreshes them. Saved colors are reapplied only on selection and on load.</li>
+    <li><strong>Regions use the building's base point.</strong> A roof has to have its base inside the rectangle, so a rectangle that only clips a roof can miss it.</li>
+    <li><strong>Clicks and typing can leak through.</strong> Releasing the mouse after a drag may also select a building. Typing a region name may trigger game hotkeys.</li>
+  </ul>
+
+  <h2>Roadmap</h2>
+  <ul>
+    <li>Confirm the tint is visible. If not, recolor the roof's part of the livery texture with per-building copies.</li>
+    <li>Reapply saved colors when the game refreshes a building's materials.</li>
+    <li>Test regions end to end in a real save.</li>
+  </ul>
+
+  <footer>
+    <p>Written from scratch. Inspired by the District mod by Slooth, but no code or assets are taken from it.</p>
+    <p>License: not chosen yet.</p>
+  </footer>
+</main>
+</body>
+</html>
